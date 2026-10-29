@@ -1,7 +1,23 @@
-{
-  "version": "Premium0.7",
-  "url": "https://www.icloud.com/shortcuts/0f823b48c0b040158e8c97c0234556c9",
+const LATEST = {
+  version: "Premium0.7",
+  url: "https://www.icloud.com/shortcuts/0f823b48c0b040158e8c97c0234556c9",
   "อัพเดท": "โหมดใหม่ new UI",
-  "author": "หวนคืน954",
-  "status": "⚙️มีการอัพเดทเวอร์ชั่นใหม่⚙️",
-}
+  author: "หวนคืน954",
+  status: "⚙️มีการอัพเดทเวอร์ชั่นใหม่⚙️",
+};
+
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    const current = url.searchParams.get("version");
+
+    if (current === LATEST.version) {
+      return Response.json({
+        version: LATEST.version,
+        status: "คำสั่งลัดเป็นเวอร์ชั่นล่าสุดแล้ว",
+      });
+    }
+    return Response.json(LATEST);
+  },
+};
+
